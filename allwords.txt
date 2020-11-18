@@ -1,3 +1,4 @@
+# Extraced from the words column of the allWords.xlsx file
 the
 of
 be

@@ -8,6 +8,7 @@ class Autocorrect:
     def createDict(self):
         fp = open(self.file)
         word = fp.readline()
+        word = fp.readline()  # one more to skip the comment line in teh beginning of the txt file
         while word:
             self.dict[word[0].lower()].append(word[:-1])
             word = fp.readline()
