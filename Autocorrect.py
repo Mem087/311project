@@ -54,10 +54,3 @@ class Autocorrect:
 
 auto = Autocorrect('allwords.txt')
 auto.run()
-# auto.createDict()
-# while(1):
-#     word = input("Enter a word: ")
-#     print(auto.searchDict(word))
-#     contin = input("Continue? yes or no ")
-#     if contin.lower() == 'no' or contin.lower() == 'n':
-#         break
