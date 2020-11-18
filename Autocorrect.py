@@ -15,26 +15,21 @@ class Autocorrect:
 
     def longestCommonSub(self, word1, word2):
         c = []
-        b = []
-        # created c and b matrix of length word1 as the num rows and word2 length be num columns
+        # created c matrix of length word1 as the num rows and word2 length be num columns
         for x in range(len(word1)):
             c.append([])
-            b.append([])
+
             for y in range(len(word2)):
                 c[x].append(0)
-                b[x].append(0)
 
         for i in range(len(word1)):
             for j in range(len(word2)):
                 if word1[i] == word2[j]:
                     c[i][j] = 1 + c[i-1][j-1]
-                    b[i][j] = b[i-1][j-1]
                 elif c[i-1][j] >= c[i][j-1]:
                     c[i][j] = c[i-1][j]
-                    b[i][j] = b[i-1][j]
                 else:
                     c[i][j] = c[i][j-1]
-                    b[i][j] = b[i][j-1]
         return c[len(word1)-1][len(word2)-1]
 
     def searchDict(self, word):
