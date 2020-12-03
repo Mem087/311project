@@ -1,3 +1,6 @@
+import tkinter as tk
+
+
 class Autocorrect:
 
     def __init__(self, fileName):
@@ -35,22 +38,45 @@ class Autocorrect:
     def searchDict(self, word):
         bestWord = None
         bestScore = 0
+        lengthDiff = None
         for i in range(len(self.dict[word[0].lower()])):
             score = self.longestCommonSub(word, self.dict[word[0].lower()][i])
-            if score > bestScore:
+            if score > bestScore:                    # A better score overeall
                 bestWord = self.dict[word[0].lower()][i]
                 bestScore = score
+            if score is bestScore:                   # Handling tie breakers
+                if lengthDiff is None or (abs(len(word) - len(self.dict[word[0].lower()][i]))) < lengthDiff:
+                    bestWord = self.dict[word[0].lower()][i]
+                    lengthDiff = abs(
+                        len(word) - len(self.dict[word[0].lower()][i]))
         return bestWord
 
-    def run(self):
-        self.createDict()
-        while(1):
-            word = input("Enter a word: ")
-            print(auto.searchDict(word))
-            contin = input("Continue? yes or no ")
-            if contin.lower() == 'no' or contin.lower() == 'n':
-                break
+
+def autocorrect():
+    word = userInput.get()
+    # to make sure to clear the previous words
+    blankSpace = tk.Label(
+        root, text="                                                                                                        ")
+    windowBox.create_window(400, 320, window=blankSpace)
+
+    # geting the user corrected word
+    autcorrectWord = tk.Label(root, text=str(auto.searchDict(word)))
+    windowBox.create_window(400, 320, window=autcorrectWord)
 
 
+# The GUI
+root = tk.Tk()
+root.title("Autocorrector")
+windowBox = tk.Canvas(root, width=750, height=600, bg="light steel blue")
+windowBox.pack()
+
+userInput = tk.Entry(root)
+windowBox.create_window(400, 200, window=userInput)
 auto = Autocorrect('allwords.txt')
-auto.run()
+auto.createDict()
+
+submit = tk.Button(text='Autocorrect', command=autocorrect,
+                   bg='DodgerBlue2', fg='white')
+windowBox.create_window(400, 250, window=submit)
+
+root.mainloop()

@@ -2,4 +2,4 @@
 
 CSCI 311 Programming Project
 
-There are currently no special features and so to run it all one would have to do is run the Autocorrect.py file and the code should immediately start.
+We added a GUI and dealt with ties so that if there are multiple words with the same best score we would try to take the word that is closer in size to the original word. To get the autocorrect working all it should take is to run the Autocorrect.py file.
